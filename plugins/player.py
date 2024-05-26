@@ -290,7 +290,7 @@ async def add_to_playlist(client, message):
             await download(track)
         
 
-@Client.on_message(filters.command(["leave", f"leave@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
+@Client.on_message(filters.command(["leave", "play", "vplay", "skip", "end", f"leave@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", f"play@{Config.BOT_USERNAME}", f"vplay@{Config.BOT_USERNAME}", f"end@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
 async def leave_voice_chat(_, m: Message):
     if not Config.CALL_STATUS:        
         k=await m.reply("<b>Not joined any voicechat.</b>", quote=False)
@@ -482,8 +482,8 @@ async def stream(client, m: Message):
         
 
 
-admincmds=["nonyplay", "leave", "pause", "nonresume", "skip", "restart", "volume", "shuffle", "clearplaylist", "export", "import", "update", 'nonreplay', 'logs', 'stream', 'nonfplay', 'schedule', 'record', 'slist', 'cancel', 'cancelall', 'vcpromote', 'vcdemote', 'refresh', 'rtitle', 'nonseek', 'vcmute', 'unmute',
-f'stream@{Config.BOT_USERNAME}', f'logs@{Config.BOT_USERNAME}', f"nonreplay@{Config.BOT_USERNAME}", f"yplay@{Config.BOT_USERNAME}", f"leave@{Config.BOT_USERNAME}", f"pause@{Config.BOT_USERNAME}", f"nonresume@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", 
+admincmds=["play", "vplay", "end", "nonyplay", "leave", "skip", "pause", "nonresume", "skip", "restart", "volume", "shuffle", "clearplaylist", "export", "import", "update", 'nonreplay', 'logs', 'stream', 'nonfplay', 'schedule', 'record', 'slist', 'cancel', 'cancelall', 'vcpromote', 'vcdemote', 'refresh', 'rtitle', 'nonseek', 'vcmute', 'unmute',
+f"play@{Config.BOT_USERNAME}", f"end@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", f"vplay@{Config.BOT_USERNAME}", f'stream@{Config.BOT_USERNAME}', f'logs@{Config.BOT_USERNAME}', f"nonreplay@{Config.BOT_USERNAME}", f"yplay@{Config.BOT_USERNAME}", f"leave@{Config.BOT_USERNAME}", f"pause@{Config.BOT_USERNAME}", f"nonresume@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", 
 f"restart@{Config.BOT_USERNAME}", f"volume@{Config.BOT_USERNAME}", f"shuffle@{Config.BOT_USERNAME}", f"clearplaylist@{Config.BOT_USERNAME}", f"export@{Config.BOT_USERNAME}", f"import@{Config.BOT_USERNAME}", f"update@{Config.BOT_USERNAME}",
 f'nonplay@{Config.BOT_USERNAME}', f'schedule@{Config.BOT_USERNAME}', f'record@{Config.BOT_USERNAME}', f'slist@{Config.BOT_USERNAME}', f'cancel@{Config.BOT_USERNAME}', f'cancelall@{Config.BOT_USERNAME}', f'vcpromote@{Config.BOT_USERNAME}', 
 f'vcdemote@{Config.BOT_USERNAME}', f'refresh@{Config.BOT_USERNAME}', f'rtitle@{Config.BOT_USERNAME}', f'nonseek@{Config.BOT_USERNAME}', f'vcmute@{Config.BOT_USERNAME}', f'vcunmute@{Config.BOT_USERNAME}'
