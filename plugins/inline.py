@@ -49,7 +49,7 @@ async def search(client, query):
             query.id,
             results=answers,
             switch_pm_text=("Search a youtube video"),
-            switch_pm_parameter="help",
+            switch_pm_parameter="nonhelp",
             cache_time=0
         )
     else:
