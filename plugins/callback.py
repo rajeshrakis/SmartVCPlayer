@@ -95,7 +95,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             return
 
 
-        elif query.data.startswith("help"):
+        elif query.data.startswith("nonhelp"):
             me, nyav = query.data.split("_")
             back=InlineKeyboardMarkup(
                 [
