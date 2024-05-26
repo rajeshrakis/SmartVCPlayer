@@ -56,7 +56,7 @@ HOME_TEXT = base64.b32decode('====A7IMPBPSC3VMEC5EXQVNT24IXU5FFL34C25FPROGHYROUD
 admin_filter=filters.create(is_admin) 
 
 
-@Client.on_message(filters.command(['start', f"start@{Config.BOT_USERNAME}"]))
+@Client.on_message(filters.command(['nonstart', f"nonstart@{Config.BOT_USERNAME}"]))
 async def start(client, message):
     if len(message.command) > 1:
         if message.command[1] == 'help':
@@ -150,7 +150,7 @@ async def start(client, message):
 
 
 
-@Client.on_message(filters.command(["help", f"help@{Config.BOT_USERNAME}"]))
+@Client.on_message(filters.command(["nonhelp", f"nonhelp@{Config.BOT_USERNAME}"]))
 async def show_help(client, message):
     reply_markup=InlineKeyboardMarkup(
         [
