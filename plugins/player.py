@@ -54,7 +54,7 @@ from pyrogram import (
 
 admin_filter=filters.create(is_admin) 
 
-@Client.on_message(filters.command(["play", "fplay", f"play@{Config.BOT_USERNAME}", f"fplay@{Config.BOT_USERNAME}"]))
+@Client.on_message(filters.command(["nonplay", "nonfplay", f"nonplay@{Config.BOT_USERNAME}", f"fnonplay@{Config.BOT_USERNAME}"]))
 async def add_to_playlist(client, message):
     print(f"Command received from {message.from_user.id} in chat type: {message.chat.type}")
     with suppress(MessageIdInvalid, MessageNotModified):
@@ -88,7 +88,7 @@ async def add_to_playlist(client, message):
         yturl=""
         ysearch=""
         url=""
-        if message.command[0] == "fplay":
+        if message.command[0] == "nonfplay":
             if not (message.from_user is None and message.sender_chat or message.from_user.id in admins):
                 k=await message.reply("This command is only for admins.", quote=False)
                 await delete_messages([message, k])
@@ -187,7 +187,7 @@ async def add_to_playlist(client, message):
             if title is None:
                 title = 'Music'
             data={1:title, 2:file_id, 3:"telegram", 4:user, 5:unique}
-            if message.command[0] == "fplay":
+            if message.command[0] == "nonfplay":
                 pla = [data] + Config.playlist
                 Config.playlist = pla
             else:
@@ -245,7 +245,7 @@ async def add_to_playlist(client, message):
                     await delete_messages([message, msg])
                     return 
             data={1:title, 2:url, 3:"youtube", 4:user, 5:f"{nyav}_{user_id}"}
-            if message.command[0] == "fplay":
+            if message.command[0] == "nonfplay":
                 pla = [data] + Config.playlist
                 Config.playlist = pla
             else:
@@ -254,7 +254,7 @@ async def add_to_playlist(client, message):
             await msg.edit(f"<b>[{title}]({url}) added to playist</b>", disable_web_page_preview=True)
         elif type == "direct":
             data={1:"Music", 2:url, 3:"url", 4:user, 5:f"{nyav}_{user_id}"}
-            if message.command[0] == "fplay":
+            if message.command[0] == "nonfplay":
                 pla = [data] + Config.playlist
                 Config.playlist = pla
             else:
@@ -270,7 +270,7 @@ async def add_to_playlist(client, message):
             await msg.edit("<b>Downloading and Processing...</b>")
             await download(Config.playlist[0], msg)  
             await play()
-        elif message.command[0] == "fplay":
+        elif message.command[0] == "nonfplay":
             await msg.edit("<b>Downloading and Processing...</b>")
             await download(Config.playlist[0], msg)  
             await play()
@@ -336,7 +336,7 @@ async def clear_play_list(client, m: Message):
 
 
 
-@Client.on_message(filters.command(["cplay", f"cplay@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
+@Client.on_message(filters.command(["noncplay", f"noncplay@{Config.BOT_USERNAME}"]) & admin_filter & chat_filter)
 async def channel_play_list(client, m: Message):
     with suppress(MessageIdInvalid, MessageNotModified):
         k=await m.reply("<b>Setting up for channel play...</b>", quote=False)
@@ -482,21 +482,21 @@ async def stream(client, m: Message):
         
 
 
-admincmds=["yplay", "leave", "pause", "resume", "skip", "restart", "volume", "shuffle", "clearplaylist", "export", "import", "update", 'replay', 'logs', 'stream', 'fplay', 'schedule', 'record', 'slist', 'cancel', 'cancelall', 'vcpromote', 'vcdemote', 'refresh', 'rtitle', 'seek', 'vcmute', 'unmute',
-f'stream@{Config.BOT_USERNAME}', f'logs@{Config.BOT_USERNAME}', f"replay@{Config.BOT_USERNAME}", f"yplay@{Config.BOT_USERNAME}", f"leave@{Config.BOT_USERNAME}", f"pause@{Config.BOT_USERNAME}", f"resume@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", 
+admincmds=["nonyplay", "leave", "pause", "nonresume", "skip", "restart", "volume", "shuffle", "clearplaylist", "export", "import", "update", 'nonreplay', 'logs', 'stream', 'nonfplay', 'schedule', 'record', 'slist', 'cancel', 'cancelall', 'vcpromote', 'vcdemote', 'refresh', 'rtitle', 'nonseek', 'vcmute', 'unmute',
+f'stream@{Config.BOT_USERNAME}', f'logs@{Config.BOT_USERNAME}', f"nonreplay@{Config.BOT_USERNAME}", f"yplay@{Config.BOT_USERNAME}", f"leave@{Config.BOT_USERNAME}", f"pause@{Config.BOT_USERNAME}", f"nonresume@{Config.BOT_USERNAME}", f"skip@{Config.BOT_USERNAME}", 
 f"restart@{Config.BOT_USERNAME}", f"volume@{Config.BOT_USERNAME}", f"shuffle@{Config.BOT_USERNAME}", f"clearplaylist@{Config.BOT_USERNAME}", f"export@{Config.BOT_USERNAME}", f"import@{Config.BOT_USERNAME}", f"update@{Config.BOT_USERNAME}",
-f'play@{Config.BOT_USERNAME}', f'schedule@{Config.BOT_USERNAME}', f'record@{Config.BOT_USERNAME}', f'slist@{Config.BOT_USERNAME}', f'cancel@{Config.BOT_USERNAME}', f'cancelall@{Config.BOT_USERNAME}', f'vcpromote@{Config.BOT_USERNAME}', 
-f'vcdemote@{Config.BOT_USERNAME}', f'refresh@{Config.BOT_USERNAME}', f'rtitle@{Config.BOT_USERNAME}', f'seek@{Config.BOT_USERNAME}', f'mute@{Config.BOT_USERNAME}', f'vcunmute@{Config.BOT_USERNAME}'
+f'nonplay@{Config.BOT_USERNAME}', f'schedule@{Config.BOT_USERNAME}', f'record@{Config.BOT_USERNAME}', f'slist@{Config.BOT_USERNAME}', f'cancel@{Config.BOT_USERNAME}', f'cancelall@{Config.BOT_USERNAME}', f'vcpromote@{Config.BOT_USERNAME}', 
+f'vcdemote@{Config.BOT_USERNAME}', f'refresh@{Config.BOT_USERNAME}', f'rtitle@{Config.BOT_USERNAME}', f'nonseek@{Config.BOT_USERNAME}', f'vcmute@{Config.BOT_USERNAME}', f'vcunmute@{Config.BOT_USERNAME}'
 ]
 
-allcmd = ["play", "player", f"play@{Config.BOT_USERNAME}", f"player@{Config.BOT_USERNAME}"] + admincmds
+allcmd = ["nonplay", "nonplayer", f"nonplay@{Config.BOT_USERNAME}", f"nonplayer@{Config.BOT_USERNAME}"] + admincmds
 
 @Client.on_message(filters.command(admincmds) & ~admin_filter & chat_filter)
 async def notforu(_, m: Message):
     k = await _.send_message(
         chat_id=m.chat.id,
         text="<b>Sorry! You are not authorized ❌</b>",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Join Now ✅', url='https://t.me/itsSmartDev')]])
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Join Now ✅', url='https://t.me/HeartBeat_Muzic')]])
     )
     await delete_messages([m, k])
 
@@ -518,9 +518,9 @@ async def not_chat(_, m: Message):
     else:
         buttons = [
             [
-                InlineKeyboardButton('⚡️Make Own Bot', url='https://github.com/bisnuray/SmartVCPlayer'),
-                InlineKeyboardButton('✅ Join Here', url='https://t.me/itsSmartDev'),
+                InlineKeyboardButton('⚡️Make Own Bot', url='https://t.me/HeartBeat_Offi'),
+                InlineKeyboardButton('✅ Join Here', url='https://t.me/HeartBeat_Muzic'),
             ]
             ]
-        await m.reply("<b>You can't use this bot in this group, for that you have to make your own bot from the [SOURCE CODE](https://github.com/bisnuray/SmartVCPlayer) below.</b>", quote=False, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
+        await m.reply("<b>You can't use this bot in this group, for that you have to make your own bot from the [𝅗ـﮩ٨ـ𝅽𝅾𓆩𝞖𝘌𝘈𝘙𝘛𝂬♡𝂬𝞑𝘌𝘈𝘛▹ᴴᴮ⸳⸳ⷮ⸳⸳ⷨ𓆪ﮩ٨ـ𝅽𝅾‐𝅘](https://t.me/HeartBeat_Muzic) below.</b>", quote=False, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
 
